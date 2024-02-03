@@ -1,11 +1,14 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
+import TextForm from "./components/TextForm";
 
 function App() {
   return (
     <>
-      {/* if number given -> console -> error  */}
       <Navbar title="TextUtils" about="About Us" />
+      <div className="container my-">
+        <TextForm heading="Enter the text to analyze below" />
+      </div>
     </>
   );
 }
