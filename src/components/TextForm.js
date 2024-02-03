@@ -19,7 +19,42 @@ export default function TextForm(props) {
     setText(event.target.value);
   };
 
+  const handleFindChange = (event) => {
+    setFind(event.target.value);
+  };
+
+  const handleReplaceChange = (event) => {
+    setReplace(event.target.value);
+  };
+
+  const handleSpeechClick = () => {
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    // Select a voice
+    const voices = speechSynthesis.getVoices();
+    utterance.voice = voices[4]; // Choose a specific voice
+
+    // Speak the text
+    speechSynthesis.speak(utterance);
+  };
+
+  const replaceAll = () => {
+    let t = text.split(" ");
+    let ans = "";
+    for (let i = 0; i < t.length; i++) {
+      if (t[i] === find) {
+        ans += replace + " ";
+      } else {
+        ans += t[i] + " ";
+      }
+    }
+    setText(ans);
+  };
+
   const [text, setText] = useState("");
+  const [find, setFind] = useState("");
+  const [replace, setReplace] = useState("");
+
   // text = "new text"; // wrong way to change the state
   // setText("new text"); // correct way to change the state
 
@@ -44,6 +79,40 @@ export default function TextForm(props) {
       <button className="btn btn-secondary " onClick={handleClearClick}>
         Clear Text
       </button>
+      {/* text to speech */}
+      <button className="btn btn-primary mx-3" onClick={handleSpeechClick}>
+        Text to speech
+      </button>
+
+      {/* find and replace */}
+      <div className="container my-3">
+        <div className="form-floating mb-3">
+          <input
+            value={find}
+            onChange={handleFindChange}
+            type="text"
+            className="form-control"
+            id="find"
+            placeholder="find"
+          />
+          <label htmlFor="find">Find</label>
+        </div>
+        <div className="form-floating">
+          <input
+            value={replace}
+            onChange={handleReplaceChange}
+            type="text"
+            className="form-control"
+            id="replace"
+            placeholder="replace"
+          />
+          <label htmlFor="replace">Replace</label>
+        </div>
+        <button className="btn btn-primary my-3" onClick={replaceAll}>
+          Replace
+        </button>
+      </div>
+
       <div className="container my-3">
         <h1>Your text summary</h1>
         <p>
