@@ -38,6 +38,15 @@ export default function TextForm(props) {
     speechSynthesis.speak(utterance);
   };
 
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(text);
+  };
+
+  const removeExtraSpaces = () => {
+    let t = text.split(/[ ]+/); // 1 or more space
+    setText(t.join(" "));
+  };
+
   const replaceAll = () => {
     let t = text.split(" ");
     let ans = "";
@@ -76,12 +85,20 @@ export default function TextForm(props) {
       <button className="btn btn-secondary mx-3" onClick={handleLoClick}>
         Convert to Lowercase
       </button>
-      <button className="btn btn-secondary " onClick={handleClearClick}>
+      <button className="btn btn-secondary" onClick={handleClearClick}>
         Clear Text
       </button>
       {/* text to speech */}
       <button className="btn btn-primary mx-3" onClick={handleSpeechClick}>
         Text to speech
+      </button>
+      {/* copy to clipboard */}
+      <button className="btn btn-primary" onClick={handleCopyClick}>
+        Copy
+      </button>
+      {/* remove extra spaces */}
+      <button className="btn btn-primary mx-3" onClick={removeExtraSpaces}>
+        Remove Extra Spaces
       </button>
 
       {/* find and replace */}
