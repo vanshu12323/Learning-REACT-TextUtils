@@ -77,27 +77,30 @@ export default function TextForm(props) {
           value={text}
           id="myBox"
           rows="8"
+          style={{
+            backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
+          }}
         ></textarea>
       </div>
-      <button className="btn btn-primary" onClick={handleUpClick}>
+      <button className="btn btn-primary my-3" onClick={handleUpClick}>
         Convert to Uppercase
       </button>
-      <button className="btn btn-secondary mx-3" onClick={handleLoClick}>
+      <button className="btn btn-secondary mx-3 my-3" onClick={handleLoClick}>
         Convert to Lowercase
       </button>
-      <button className="btn btn-secondary" onClick={handleClearClick}>
+      <button className="btn btn-secondary my-3" onClick={handleClearClick}>
         Clear Text
       </button>
       {/* text to speech */}
-      <button className="btn btn-primary mx-3" onClick={handleSpeechClick}>
+      <button className="btn btn-primary mx-3 my-3" onClick={handleSpeechClick}>
         Text to speech
       </button>
       {/* copy to clipboard */}
-      <button className="btn btn-primary" onClick={handleCopyClick}>
+      <button className="btn btn-primary my-3" onClick={handleCopyClick}>
         Copy
       </button>
       {/* remove extra spaces */}
-      <button className="btn btn-primary mx-3" onClick={removeExtraSpaces}>
+      <button className="btn btn-primary mx-3 my-3" onClick={removeExtraSpaces}>
         Remove Extra Spaces
       </button>
 
@@ -111,6 +114,9 @@ export default function TextForm(props) {
             className="form-control"
             id="find"
             placeholder="find"
+            style={{
+              backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
+            }}
           />
           <label htmlFor="find">Find</label>
         </div>
@@ -122,6 +128,9 @@ export default function TextForm(props) {
             className="form-control"
             id="replace"
             placeholder="replace"
+            style={{
+              backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
+            }}
           />
           <label htmlFor="replace">Replace</label>
         </div>
@@ -138,7 +147,7 @@ export default function TextForm(props) {
         <p>{text.split(" ").length * 0.008} minutes read</p>
 
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Enter something to preview"}</p>
       </div>
     </>
   );
