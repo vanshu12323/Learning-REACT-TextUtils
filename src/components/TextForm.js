@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function TextForm(props) {
   const handleUpClick = () => {
@@ -70,8 +70,61 @@ export default function TextForm(props) {
   const [find, setFind] = useState("");
   const [replace, setReplace] = useState("");
 
+  const textLength = () => {
+    let s = text.split(" ");
+    let l = 0;
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] != "") {
+        l++;
+      }
+    }
+    return l;
+  };
+
   // text = "new text"; // wrong way to change the state
   // setText("new text"); // correct way to change the state
+
+  useEffect(() => {
+    toggleMyStyle(); // Call toggleMyStyle whenever theme changes
+  }, [props.theme]); // Run this effect whenever props.theme changes
+
+  const [myStyle, setMyStyle] = useState({
+    backgroundColor: "white",
+    color: "black",
+  });
+
+  // change myStyle based on theme
+  const toggleMyStyle = () => {
+    let t = props.theme;
+    if (t === "light") {
+      setMyStyle({
+        backgroundColor: "white",
+        color: "black",
+      });
+    } else if (t === "dark") {
+      setMyStyle({
+        backgroundColor: "#2b3035dd",
+        color: "#d6d6d4",
+      });
+    } else if (t === "pink") {
+      setMyStyle({
+        backgroundColor: "#67729D",
+        color: "#E7BCDE",
+      });
+    } else if (t === "blue") {
+      setMyStyle({
+        backgroundColor: "#435585",
+        color: "#F5E8C7",
+      });
+    } else if (t === "green") {
+      setMyStyle({
+        backgroundColor: "#D0DC9F",
+        color: "#6D7E22",
+      });
+    }
+  };
+
+  // #D0DC9F
 
   return (
     <>
@@ -83,9 +136,10 @@ export default function TextForm(props) {
           value={text}
           id="myBox"
           rows="8"
-          style={{
-            backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
-          }}
+          // style={{
+          //   backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
+          // }}
+          style={myStyle}
         ></textarea>
       </div>
       <button className="btn btn-primary my-3" onClick={handleUpClick}>
@@ -120,9 +174,10 @@ export default function TextForm(props) {
             className="form-control"
             id="find"
             placeholder="find"
-            style={{
-              backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
-            }}
+            // style={{
+            //   backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
+            // }}
+            style={myStyle}
           />
           <label htmlFor="find">Find</label>
         </div>
@@ -134,9 +189,10 @@ export default function TextForm(props) {
             className="form-control"
             id="replace"
             placeholder="replace"
-            style={{
-              backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
-            }}
+            // style={{
+            //   backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
+            // }}
+            style={myStyle}
           />
           <label htmlFor="replace">Replace</label>
         </div>
@@ -148,9 +204,9 @@ export default function TextForm(props) {
       <div className="container my-3">
         <h1>Your text summary</h1>
         <p>
-          {text.split(" ").length} and {text.length} characters
+          {textLength()} words and {text.length} characters
         </p>
-        <p>{text.split(" ").length * 0.008} minutes read</p>
+        <p>{textLength() * 0.008} minutes read</p>
 
         <h2>Preview</h2>
         <p>{text.length > 0 ? text : "Enter something to preview"}</p>
