@@ -39,6 +39,14 @@ function App() {
     setTheme(e.target.value);
     let t = e.target.value;
     let capi = t.charAt(0).toUpperCase(t[0]) + t.slice(1);
+    document.title = "TextUtils - " + capi + " mode";
+    // distarctions !!!
+    // setInterval(() => {
+    //   document.title = "oops";
+    // }, 1500);
+    // setInterval(() => {
+    //   document.title = "hehe";
+    // }, 2000);
     showAlert(capi + " mode has been enabled", "success");
     if (t === "dark") {
       document.body.style.backgroundColor = "#2b3035dd";
