@@ -119,7 +119,7 @@ export default function TextForm(props) {
     } else if (t === "green") {
       setMyStyle({
         backgroundColor: "#D0DC9F",
-        color: "#6D7E22",
+        color: "#6D7E22 ",
       });
     }
   };
