@@ -3,16 +3,9 @@ import * as React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
-import About from "./components/About";
 import Alert from "./components/Alert";
 
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  Route,
-  Routes,
-  RouterProvider,
-} from "react-router-dom";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -70,49 +63,49 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Navbar
-          title="TextUtils"
-          about="About Us"
-          mode={mode}
-          theme={theme}
-          toggleMode={toggleMode}
-        />
-        {/* SELECTING THEME */}
-        <select
-          className="form-select my-3 mx-2"
-          aria-label="Default select example"
-          style={{ width: "200px" }}
-          onChange={handleThemeChange}
-        >
-          <option defaultValue="light">Select Theme</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="pink">Pink</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-        </select>
-        <Alert alert={alert} />
-        <div className="container my-3">
-          <Routes>
-            {/* exact path -> complete matching */}
-            {/* path -> partial matching */}
-            <Route
+      {/* <BrowserRouter> */}
+      <Navbar
+        title="TextUtils"
+        about="About Us"
+        mode={mode}
+        theme={theme}
+        toggleMode={toggleMode}
+      />
+      {/* SELECTING THEME */}
+      <select
+        className="form-select my-3 mx-2"
+        aria-label="Default select example"
+        style={{ width: "200px" }}
+        onChange={handleThemeChange}
+      >
+        <option defaultValue="light">Select Theme</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="pink">Pink</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+      </select>
+      <Alert alert={alert} />
+      <div className="container my-3">
+        {/* <Routes> */}
+        {/* exact path -> complete matching */}
+        {/* path -> partial matching */}
+        {/* <Route
               exact
               path="/"
-              element={
-                <TextForm
-                  showAlert={showAlert}
-                  heading="Enter the text to analyze below"
-                  mode={mode}
-                  theme={theme}
-                />
-              }
+              element={ */}
+        <TextForm
+          showAlert={showAlert}
+          heading="Enter the text to analyze below"
+          mode={mode}
+          theme={theme}
+        />
+        {/* }
             ></Route>
             <Route exact path="/about" element={<About />}></Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
+          </Routes> */}
+      </div>
+      {/* </BrowserRouter> */}
     </>
   );
 }

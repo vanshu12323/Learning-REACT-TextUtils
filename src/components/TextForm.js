@@ -74,7 +74,7 @@ export default function TextForm(props) {
     let s = text.split(" ");
     let l = 0;
     for (let i = 0; i < s.length; i++) {
-      if (s[i] != "") {
+      if (s[i] !== "") {
         l++;
       }
     }
