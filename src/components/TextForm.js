@@ -1,21 +1,38 @@
 import React, { useState, useEffect } from "react";
 
 export default function TextForm(props) {
+  const textLength = () => {
+    let s = text.split(/\s+/);
+    let l = 0;
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] !== "") {
+        l++;
+      }
+    }
+    return l;
+  };
+
   const handleUpClick = () => {
     let new_text = text.toUpperCase();
     setText(new_text);
-    props.showAlert("Converted to uppercase", "success");
+    if (textLength() > 0) {
+      props.showAlert("Converted to uppercase", "success");
+    }
   };
 
   const handleLoClick = () => {
     let new_text = text.toLowerCase();
     setText(new_text);
-    props.showAlert("Converted to lowercase", "success");
+    if (textLength() > 0) {
+      props.showAlert("Converted to lowercase", "success");
+    }
   };
 
   const handleClearClick = () => {
     setText("");
-    props.showAlert("Text cleared", "success");
+    if (textLength() > 0) {
+      props.showAlert("Text cleared", "success");
+    }
   };
 
   const handleOnChange = (event) => {
@@ -43,7 +60,9 @@ export default function TextForm(props) {
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(text);
-    props.showAlert("Copied to clipboard", "success");
+    if (textLength() > 0) {
+      props.showAlert("Copied to clipboard", "success");
+    }
   };
 
   const removeExtraSpaces = () => {
@@ -63,23 +82,14 @@ export default function TextForm(props) {
       }
     }
     setText(ans);
-    props.showAlert("Replaced all " + find + " with " + replace, "success");
+    if (textLength() > 0) {
+      props.showAlert("Replaced all " + find + " with " + replace, "success");
+    }
   };
 
   const [text, setText] = useState("");
   const [find, setFind] = useState("");
   const [replace, setReplace] = useState("");
-
-  const textLength = () => {
-    let s = text.split(" ");
-    let l = 0;
-    for (let i = 0; i < s.length; i++) {
-      if (s[i] !== "") {
-        l++;
-      }
-    }
-    return l;
-  };
 
   // text = "new text"; // wrong way to change the state
   // setText("new text"); // correct way to change the state
@@ -124,8 +134,6 @@ export default function TextForm(props) {
     }
   };
 
-  // #D0DC9F
-
   return (
     <>
       <div className="mb-3">
@@ -136,9 +144,6 @@ export default function TextForm(props) {
           value={text}
           id="myBox"
           rows="8"
-          // style={{
-          //   backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
-          // }}
           style={myStyle}
         ></textarea>
       </div>
@@ -174,9 +179,6 @@ export default function TextForm(props) {
             className="form-control"
             id="find"
             placeholder="find"
-            // style={{
-            //   backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
-            // }}
             style={myStyle}
           />
           <label htmlFor="find">Find</label>
@@ -189,9 +191,6 @@ export default function TextForm(props) {
             className="form-control"
             id="replace"
             placeholder="replace"
-            // style={{
-            //   backgroundColor: props.mode === "light" ? "white" : "#d6d6d4",
-            // }}
             style={myStyle}
           />
           <label htmlFor="replace">Replace</label>

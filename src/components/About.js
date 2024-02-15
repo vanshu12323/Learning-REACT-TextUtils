@@ -1,31 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function About() {
+export default function About(props) {
+  useEffect(() => {
+    toggleMyStyle(); // Call toggleMyStyle whenever theme changes
+  }, [props.theme]);
+
   const [myStyle, setMyStyle] = useState({
     color: "black",
     backgroundColor: "white",
     border: "0.5px solid grey",
   });
 
-  const [btnText, setBtnext] = useState("Enable dark mode");
-
-  const toggleStyle = () => {
-    if (myStyle.color === "white") {
+  const toggleMyStyle = () => {
+    let t = props.theme;
+    if (t === "light") {
       setMyStyle({
-        color: "black",
         backgroundColor: "white",
-        border: "0.5px solid grey",
+        color: "black",
       });
-      setBtnext("Enable dark mode");
-    } else {
+    } else if (t === "dark") {
       setMyStyle({
-        color: "white",
-        backgroundColor: "black",
-        border: "1px solid white",
+        backgroundColor: "#2b3035dd",
+        color: "#d6d6d4",
       });
-      setBtnext("Enable light mode");
+    } else if (t === "pink") {
+      setMyStyle({
+        backgroundColor: "#67729D",
+        color: "#E7BCDE",
+      });
+    } else if (t === "blue") {
+      setMyStyle({
+        backgroundColor: "#435585",
+        color: "#F5E8C7",
+      });
+    } else if (t === "green") {
+      setMyStyle({
+        backgroundColor: "#D0DC9F",
+        color: "#6D7E22 ",
+        borderColor: "#6D7E22",
+      });
     }
   };
+
   return (
     <div className="container" style={myStyle}>
       <h1 className="my-3">About Us</h1>
@@ -124,15 +140,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className="container my-3">
-        <button
-          type="button"
-          className="btn btn-primary changeStyle"
-          onClick={toggleStyle}
-        >
-          {btnText}
-        </button>
-      </div>
+      <div className="container my-3">----------TextUtils----------</div>
     </div>
   );
 }
